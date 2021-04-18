@@ -30,11 +30,18 @@ exports.login = async (req, res) => {
     const token = await sign(payload, SECRET)
 
     //success response
-    return res.status(200).cookie('token', token, { httpOnly: true }).json({
-      success: true,
-      message: 'Logged in succefully',
-      user,
-    })
+    return res
+      .status(200)
+      .cookie('token', token, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+      })
+      .json({
+        success: true,
+        message: 'Logged in succefully',
+        user,
+      })
   } catch (error) {
     console.log(error.message)
     res.status(500).json({
@@ -46,11 +53,14 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    return res.status(200).clearCookie('token', { httpOnly: true }).json({
-      success: true,
-      message: 'Logged out succefully',
-      user: null,
-    })
+    return res
+      .status(200)
+      .clearCookie('token', { httpOnly: true, sameSite: 'none', secure: true })
+      .json({
+        success: true,
+        message: 'Logged out succefully',
+        user: null,
+      })
   } catch (error) {
     console.log(error.message)
     res.status(500).json({
