@@ -1,4 +1,4 @@
-const { PASSWORD, SECRET, CLIENT_URL } = require('../constants')
+const { PASSWORD, SECRET, CLIENT_DOMAIN } = require('../constants')
 const { sign } = require('jsonwebtoken')
 const User = require('../models/User')
 
@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
         httpOnly: true,
         sameSite: 'strict',
         secure: true,
-        domain: CLIENT_URL,
+        domain: CLIENT_DOMAIN,
       })
       .json({
         success: true,
@@ -60,7 +60,7 @@ exports.logout = async (req, res) => {
         httpOnly: true,
         sameSite: 'strict',
         secure: true,
-        domain: CLIENT_URL,
+        domain: CLIENT_DOMAIN,
       })
       .json({
         success: true,
