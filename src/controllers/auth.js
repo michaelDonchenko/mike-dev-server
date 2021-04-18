@@ -34,9 +34,9 @@ exports.login = async (req, res) => {
       .status(200)
       .cookie('token', token, {
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'strict',
         secure: true,
-        path: CLIENT_URL,
+        domain: CLIENT_URL,
       })
       .json({
         success: true,
@@ -58,9 +58,9 @@ exports.logout = async (req, res) => {
       .status(200)
       .clearCookie('token', {
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'strict',
         secure: true,
-        path: CLIENT_URL,
+        domain: CLIENT_URL,
       })
       .json({
         success: true,
