@@ -19,10 +19,12 @@ app.use(cookieParser())
 //import routers
 const authRoutes = require('./routes/auth')
 const messageRoutes = require('./routes/message')
+const adminRoutes = require('./routes/admin')
 
 //init routes
 app.use('/api', authRoutes)
 app.use('/api', messageRoutes)
+app.use('/api', adminRoutes)
 
 //app start
 const appStart = () => {
